@@ -1,0 +1,240 @@
+\begin{tikzpicture}
+    %[background rectangle/.style={fill=white}, show background rectangle]
+    %[line before snake = 0.5mm, line after snake = 0.5mm]
+
+% Structure and hdnnp
+    %\node[] (Input) at (22,6) {\textbf{High--Dimensional Neural Network Potential}};
+
+    \node[color=black,scale=1.0] (s) at (15,5.5) {\textbf{Structure}};
+    \node[color=black,scale=1.0] (e) at (28.5,5.5) {\textbf{Energy}};
+    \draw[->, color=rubblue, line width=2pt] (s) --(e);
+
+    \node[] (im) at (15,0.75)
+    {\includegraphics[width=0.12\textwidth]{\baseplotpath w2h+.png}};
+
+
+    \draw[decorate,decoration={brace,mirror},color=rubblue, line width=1.5pt] (16.2,-2.5) -- (16.2,4.0);
+
+
+    \node[color=black,scale=0.9] (Input) at (18.0,5)   {\textbf{Symmetry}};
+    \node[color=black,scale=0.9] (Input) at (18.0,4.5) {\textbf{functions}};
+    \node[] (fcut) at (16.0, 2.0)
+        {\begin{axis}[
+            xscale=0.35,
+            yscale=0.35,
+            axis lines=middle,
+            xmin=0,xmax=8,ymin=0,ymax=1.2,
+            xtick={0},
+            ytick={0}
+            ]
+          \addplot[rubblue,samples=200, line width=1.5pt, domain=0:4] {0.5*(cos(deg(pi*x/4))+1)}; %node[right]{$f=\tanh (u)$};
+          \addplot[rubblue,samples=200, line width=1.5pt, domain=0:6, dashed] {0.5*(cos(deg(pi*x/6))+1)}; %node[right]{$f=\tanh (u)$};
+          \addplot[rubblue,samples=200, line width=1.5pt, domain=0:8, dotted] {0.5*(cos(deg(pi*x/8))+1)}; %node[right]{$f=\tanh (u)$};
+        \end{axis}};
+
+    \node[] (frad) at (16.0, -0.25)
+        {\begin{axis}[
+            xscale=0.35,
+            yscale=0.35,
+            axis lines=middle,	           
+            xmin=0,xmax=5,ymin=0,ymax=1.1,
+            xtick={0},
+            ytick={0}
+            ]
+                   \addplot[rubblue,samples=200, line width=1.5pt] {exp(-1*(x-1)^2)*0.5*(cos(deg(pi*x/6))+1)};
+                   \addplot[rubblue,samples=200, line width=1.5pt,dashed] {exp(-1*(x-2)^2)*0.5*(cos(deg(pi*x/6))+1)};
+                   \addplot[rubblue,samples=200, line width=1.5pt,dotted] {exp(-1*(x-3)^2)*0.5*(cos(deg(pi*x/6))+1)};       
+        \end{axis}};
+
+    \node[] (fang) at (16.15, -2.5)
+        {\begin{axis}[
+            xscale=0.35,
+            yscale=0.35,
+            axis lines=middle,
+            xmin=0,xmax=2*pi+0.5,ymin=0,ymax=2.3,
+            xtick={0},
+            ytick={0}
+            ]
+                   \addplot[rubblue,samples=200, line width=1.5pt, domain=0:2*pi] {(1+1*cos(deg(x))^1)};
+                   \addplot[rubblue,samples=200, line width=1.5pt, domain=0:2*pi,dashed] {(1-1*cos(deg(x))^1)};
+                   %\addplot[fzjblue,samples=200, line width=1.5pt,dashed] {exp(-0.25*(x-0)^2)} node[right]{$f=\tanh (u)$};
+                   %\addplot[fzjblue,samples=200, line width=1.5pt,dotted] {exp(-1*(x-0)^2)} node[right]{$f=\tanh (u)$};       
+        \end{axis}};
+
+    \draw[decorate,decoration={brace,mirror},color=rubblue, line width=1.5pt] (19.5,-2.5) -- (19.5,4.0);
+
+    %HDNNP
+    \node[color=black,scale=0.9] (Input) at (20.5,5)   {\textbf{Input}};
+    \node[color=black,scale=0.9] (Input) at (20.5,4.5) {\textbf{vectors}};
+    \node[draw,rounded rectangle,line width=1.5pt,scale=0.9,text=rubblue,fill=rubgrey] (G1) at (20.5,3.5) {$G_{\text{H}_1}$};
+    \node[draw,rounded rectangle,line width=1.5pt,scale=0.9,text=rubblue,fill=rubgrey] (G2) at (20.5,2.5) {$G_{\text{H}_2}$};
+    \node[draw,rounded rectangle,line width=1.5pt,scale=0.5,text=rubblue,fill=rubgrey] () at (20.5,1.9) {};
+    \node[draw,rounded rectangle,line width=1.5pt,scale=0.5,text=rubblue,fill=rubgrey] () at (20.5,1.5) {};
+    \node[draw,rounded rectangle,line width=1.5pt,scale=0.5,text=rubblue,fill=rubgrey] () at (20.5,1.1) {};
+    \node[draw,rounded rectangle,line width=1.5pt,scale=0.9,text=rubblue,fill=rubgrey] (G3) at (20.5,0.5) {$G_{\text{H}_5}$};
+
+    \node[draw,rounded rectangle,line width=1.5pt,scale=0.9,text=white,fill=molRed] (G4) at (20.5,-1.0) {$G_{\text{O}_1}$};
+    \node[draw,rounded rectangle,line width=1.5pt,scale=0.9,text=white,fill=molRed] (G5) at (20.5,-2.0) {$G_{\text{O}_2}$};
+
+    \node[color=black,scale=0.9] (Input) at (23.5,5)   {\textbf{Atomic}};
+    \node[color=black,scale=0.9] (Input) at (23.5,4.5) {\textbf{NN}};
+
+    \node[scale=0.9,text=black] at (23.5,3.25){NN$_\text{H}$};
+    \node[draw,rounded rectangle,line width=1.5pt,scale=0.5,text=rubdarkgrey,fill=rubgrey] (NNH) at (23.5,2.0) {
+        \scalebox{1.0}{
+        \begin{tikzpicture}
+            \node[draw,rounded rectangle,fill=rubdarkgrey,scale=1.5] (11) at (0.0,1.0) {};
+            \node[draw,rounded rectangle,fill=rubdarkgrey,scale=1.5]  (12) at (0.0,0.0) {};
+            \node[draw,rounded rectangle,fill=rubdarkgrey,scale=1.5]  (13) at (0.0,-1.0) {};
+            \node[draw,rounded rectangle,fill=rubdarkgrey,scale=1.5]  (21) at (1.0,-1.5) {};
+            \node[draw,rounded rectangle,fill=rubdarkgrey,scale=1.5]  (22) at (1.0,-0.5) {};
+            \node[draw,rounded rectangle,fill=rubdarkgrey,scale=1.5]  (23) at (1.0, 0.5) {};
+            \node[draw,rounded rectangle,fill=rubdarkgrey,scale=1.5]  (24) at (1.0, 1.5) {};
+            \node[draw,rounded rectangle,fill=rubdarkgrey,scale=1.5]  (31) at (2.0,-1.5) {};
+            \node[draw,rounded rectangle,fill=rubdarkgrey,scale=1.5]  (32) at (2.0,-0.5) {};
+            \node[draw,rounded rectangle,fill=rubdarkgrey,scale=1.5]  (33) at (2.0, 0.5) {};
+            \node[draw,rounded rectangle,fill=rubdarkgrey,scale=1.5]  (34) at (2.0, 1.5) {};
+            \node[draw,rounded rectangle,fill=rubdarkgrey,scale=1.5]  (41) at (3.0, 1.0) {};
+            \node[draw,rounded rectangle,fill=rubdarkgrey,scale=1.5]  (42) at (3.0, 0.0) {};
+            \node[draw,rounded rectangle,fill=rubdarkgrey,scale=1.5]  (43) at (3.0,-1.0) {};
+
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (11) -- (21);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (12) -- (21);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (13) -- (21);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (11) -- (22);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (12) -- (22);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (13) -- (22);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (11) -- (23);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (12) -- (23);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (13) -- (23);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (11) -- (24);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (12) -- (24);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (13) -- (24);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (21) -- (31);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (21) -- (31);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (21) -- (32);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (21) -- (33);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (21) -- (34);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (22) -- (31);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (22) -- (32);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (22) -- (33);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (22) -- (34);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (23) -- (31);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (23) -- (32);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (23) -- (33);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (23) -- (34);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (24) -- (31);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (24) -- (32);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (24) -- (33);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (24) -- (34);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (31) -- (41);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (31) -- (42);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (31) -- (43);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (32) -- (41);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (32) -- (42);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (32) -- (43);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (33) -- (41);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (33) -- (42);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (33) -- (43);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (34) -- (41);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (34) -- (42);
+            \draw[-,color=rubdarkgrey,line width=2.0pt] (34) -- (43);
+        \end{tikzpicture}}
+     };
+    \node[scale=0.9,text=black] at (23.5,-0.25){NN$_\text{O}$};
+    \node[draw,rounded rectangle,line width=1.5pt,scale=0.5,text=white,fill=molRed] (NNO) at (23.5,-1.5) {
+        \scalebox{1.0}{
+        \begin{tikzpicture}
+            \node[draw,rounded rectangle,fill=white,scale=1.5] (11) at (0.0,1.0) {};
+            \node[draw,rounded rectangle,fill=white,scale=1.5]  (12) at (0.0,0.0) {};
+            \node[draw,rounded rectangle,fill=white,scale=1.5]  (13) at (0.0,-1.0) {};
+            \node[draw,rounded rectangle,fill=white,scale=1.5]  (21) at (1.0,-1.5) {};
+            \node[draw,rounded rectangle,fill=white,scale=1.5]  (22) at (1.0,-0.5) {};
+            \node[draw,rounded rectangle,fill=white,scale=1.5]  (23) at (1.0, 0.5) {};
+            \node[draw,rounded rectangle,fill=white,scale=1.5]  (24) at (1.0, 1.5) {};
+            \node[draw,rounded rectangle,fill=white,scale=1.5]  (31) at (2.0,-1.5) {};
+            \node[draw,rounded rectangle,fill=white,scale=1.5]  (32) at (2.0,-0.5) {};
+            \node[draw,rounded rectangle,fill=white,scale=1.5]  (33) at (2.0, 0.5) {};
+            \node[draw,rounded rectangle,fill=white,scale=1.5]  (34) at (2.0, 1.5) {};
+            \node[draw,rounded rectangle,fill=white,scale=1.5]  (41) at (3.0, 1.0) {};
+            \node[draw,rounded rectangle,fill=white,scale=1.5]  (42) at (3.0, 0.0) {};
+            \node[draw,rounded rectangle,fill=white,scale=1.5]  (43) at (3.0,-1.0) {};
+
+            \draw[-,color=white,line width=2.0pt] (11) -- (21);
+            \draw[-,color=white,line width=2.0pt] (12) -- (21);
+            \draw[-,color=white,line width=2.0pt] (13) -- (21);
+            \draw[-,color=white,line width=2.0pt] (11) -- (22);
+            \draw[-,color=white,line width=2.0pt] (12) -- (22);
+            \draw[-,color=white,line width=2.0pt] (13) -- (22);
+            \draw[-,color=white,line width=2.0pt] (11) -- (23);
+            \draw[-,color=white,line width=2.0pt] (12) -- (23);
+            \draw[-,color=white,line width=2.0pt] (13) -- (23);
+            \draw[-,color=white,line width=2.0pt] (11) -- (24);
+            \draw[-,color=white,line width=2.0pt] (12) -- (24);
+            \draw[-,color=white,line width=2.0pt] (13) -- (24);
+            \draw[-,color=white,line width=2.0pt] (21) -- (31);
+            \draw[-,color=white,line width=2.0pt] (21) -- (31);
+            \draw[-,color=white,line width=2.0pt] (21) -- (32);
+            \draw[-,color=white,line width=2.0pt] (21) -- (33);
+            \draw[-,color=white,line width=2.0pt] (21) -- (34);
+            \draw[-,color=white,line width=2.0pt] (22) -- (31);
+            \draw[-,color=white,line width=2.0pt] (22) -- (32);
+            \draw[-,color=white,line width=2.0pt] (22) -- (33);
+            \draw[-,color=white,line width=2.0pt] (22) -- (34);
+            \draw[-,color=white,line width=2.0pt] (23) -- (31);
+            \draw[-,color=white,line width=2.0pt] (23) -- (32);
+            \draw[-,color=white,line width=2.0pt] (23) -- (33);
+            \draw[-,color=white,line width=2.0pt] (23) -- (34);
+            \draw[-,color=white,line width=2.0pt] (24) -- (31);
+            \draw[-,color=white,line width=2.0pt] (24) -- (32);
+            \draw[-,color=white,line width=2.0pt] (24) -- (33);
+            \draw[-,color=white,line width=2.0pt] (24) -- (34);
+            \draw[-,color=white,line width=2.0pt] (31) -- (41);
+            \draw[-,color=white,line width=2.0pt] (31) -- (42);
+            \draw[-,color=white,line width=2.0pt] (31) -- (43);
+            \draw[-,color=white,line width=2.0pt] (32) -- (41);
+            \draw[-,color=white,line width=2.0pt] (32) -- (42);
+            \draw[-,color=white,line width=2.0pt] (32) -- (43);
+            \draw[-,color=white,line width=2.0pt] (33) -- (41);
+            \draw[-,color=white,line width=2.0pt] (33) -- (42);
+            \draw[-,color=white,line width=2.0pt] (33) -- (43);
+            \draw[-,color=white,line width=2.0pt] (34) -- (41);
+            \draw[-,color=white,line width=2.0pt] (34) -- (42);
+            \draw[-,color=white,line width=2.0pt] (34) -- (43);
+        \end{tikzpicture}}
+    };
+
+    \draw[color=rubblue, line width=1.5pt] (NNH) -- (G1);
+    \draw[color=rubblue, line width=1.5pt] (NNH) -- (G2);
+    \draw[color=rubblue, line width=1.5pt] (NNH) -- (G3);
+    \draw[color=rubblue, line width=1.5pt] (NNO) -- (G4);
+    \draw[color=rubblue, line width=1.5pt] (NNO) -- (G5);
+
+    \node[color=black,scale=0.9] (Input) at (26.5,5)   {\textbf{Atomic}};
+    \node[color=black,scale=0.9] (Input) at (26.5,4.5) {\textbf{energy}};
+    \node[draw,rounded rectangle,line width=1.5pt,scale=0.9,text=rubblue,fill=rubgrey] (E1) at (26.5,3.5) {$E_{\text{H}_1}$};
+    \node[draw,rounded rectangle,line width=1.5pt,scale=0.9,text=rubblue,fill=rubgrey] (E2) at (26.5,2.5) {$E_{\text{H}_2}$};
+    \node[draw,rounded rectangle,line width=1.5pt,scale=0.5,text=rubblue,fill=rubgrey] () at (26.5,1.9) {};
+    \node[draw,rounded rectangle,line width=1.5pt,scale=0.5,text=rubblue,fill=rubgrey] () at (26.5,1.5) {};
+    \node[draw,rounded rectangle,line width=1.5pt,scale=0.5,text=rubblue,fill=rubgrey] () at (26.5,1.1) {};
+    \node[draw,rounded rectangle,line width=1.5pt,scale=0.9,text=rubblue,fill=rubgrey] (E3) at (26.5,0.5) {$E_{\text{H}_5}$};
+
+    \node[draw,rounded rectangle,line width=1.5pt,scale=0.9,text=white,fill=molRed] (E4) at (26.5,-1) {$E_{\text{O}_1}$};
+    \node[draw,rounded rectangle,line width=1.5pt,scale=0.9,text=white,fill=molRed] (E5) at (26.5,-2.0) {$E_{\text{O}_2}$};
+
+    \draw[color=rubblue, line width=1.5pt] (NNH) -- (E1);
+    \draw[color=rubblue, line width=1.5pt] (NNH) -- (E2);
+    \draw[color=rubblue, line width=1.5pt] (NNH) -- (E3);
+    \draw[color=rubblue, line width=1.5pt] (NNO) -- (E4);
+    \draw[color=rubblue, line width=1.5pt] (NNO) -- (E5);
+
+
+    \node[draw,rounded rectangle,rounded corners=2pt,line width=1.5pt,scale=1.0,text=rubblue] (Etot) at (28.5,0.75) {$E_\text{tot}$};
+
+    \draw[color=rubblue, line width=1.5pt] (E1) -- (Etot);
+    \draw[color=rubblue, line width=1.5pt] (E2) -- (Etot);
+    \draw[color=rubblue, line width=1.5pt] (E3) -- (Etot);
+    \draw[color=rubblue, line width=1.5pt] (E4) -- (Etot);
+    \draw[color=rubblue, line width=1.5pt] (E5) -- (Etot);
+
+\end{tikzpicture}
