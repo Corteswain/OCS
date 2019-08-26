@@ -49,6 +49,12 @@ J{\"{o}}rg Behler.
 \newblock {\em Angewandte Chemie International Edition}, 56(42):12828--12840,
   oct 2017.
 
+\bibitem{Schran2019}
+Christoph Schran, J{\"{o}}rg Behler, and Dominik Marx.
+\newblock {Automated Fitting of Neural Network Potentials at Coupled Cluster
+  Accuracy: Protonated Water Clusters as Testing Ground}.
+\newblock 2019.
+
 \bibitem{Aziz1995}
 Ronald~A. Aziz, Alec~R. Janzen, and Michael~R. Moldover.
 \newblock {Ab Initio Calculations for Helium: A Standard for Transport Property
